@@ -35,7 +35,7 @@
     innerContainer.appendChild( content ).id = 'open-search-content';
 
     var input = this._createElement('input', content, 'open-search-input', '', '');
-    input.placeholder = 'Test';
+    input.placeholder = 'Search ArcGIS Open Data';
 
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
     this._createElement('ul', resultsContainer, 'open-search-results-list', '', '');
