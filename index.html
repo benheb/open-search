@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Search Test Page</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="open-search.css" />
+    <style>
+      body {
+        margin:0px;
+        padding:0px;
+      }
+      #search-container {
+        width:500px;
+        height:400px;
+        margin:50px;
+        overflow: hidden;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="search-container"></div>
+
+    <script src="open-search.js"></script>
+
+    <script>
+       var search = new OpenSearch('search-container', {});
+    </script>
+  </body>
+</html>
