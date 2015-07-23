@@ -37,6 +37,8 @@
     var input = this._createElement('input', content, 'open-search-input', '', '');
     input.placeholder = 'Search ArcGIS Open Data';
 
+    this._createElement('div', content, 'open-search-loader', '', 'open-search-loader');
+
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
 
     var containerHeight = document.getElementById('open-search').clientHeight;
@@ -147,19 +149,18 @@
     var self = this;
     var val = e.target.value;
 
-    //if ( val.length > 2 ) {
+    document.getElementById( 'open-search-loader' ).style.display = 'block';
 
-      function reqListener () {
-        var res = JSON.parse(this.responseText);
-        self._buildResultList(res);
-      }
+    function reqListener () {
+      var res = JSON.parse(this.responseText);
+      self._buildResultList(res);
+      document.getElementById( 'open-search-loader' ).style.display = 'none';
+    }
 
-      var oReq = new XMLHttpRequest();
-      oReq.onload = reqListener;
-      oReq.open('get', 'http://opendata.arcgis.com/datasets.json?q='+val+'&sort_by=relevance', true);
-      oReq.send();
-
-    //}
+    var oReq = new XMLHttpRequest();
+    oReq.onload = reqListener;
+    oReq.open('get', 'http://opendata.arcgis.com/datasets.json?q='+val+'&sort_by=relevance', true);
+    oReq.send();
 
   }
 
@@ -174,7 +175,6 @@
 
   OpenSearch.prototype.drag = function(e) {
     e.dataTransfer.setData("text", e.target.title);
-    console.log('drag me...', e.target.title);
   }
 
 
@@ -209,7 +209,6 @@
   }
 
   OpenSearch.prototype._onDragStart = function(e) {
-    console.log('on drag start');
     this.drag(e);
   }
 
