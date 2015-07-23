@@ -38,9 +38,14 @@
     input.placeholder = 'Search ArcGIS Open Data';
 
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
+
+    var containerHeight = document.getElementById('open-search').clientHeight;
+    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 100 + 'px';
+
     this._createElement('ul', resultsContainer, 'open-search-results-list', '', '');
 
-    this._idEventBuilder('keyup', 'open-search-input', '_onSearchKeyup' );
+    this._idEventBuilder('keydown', 'open-search-input', '_onSearchKeyup' );
+
   }
 
 
@@ -56,15 +61,17 @@
     res.data.forEach(function(r, i) {
       result = document.createElement( 'li' );
       el.appendChild( result ).className = 'open-search-result';
-      result.title = r.url;
+      result.title = r.url +','+ r.id;
+      result.draggable = true;
 
       self._createElement('div', result, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
       self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
-      self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count, 'open-search-result-feature-count');
+      self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
 
     }); 
 
     this._classEventBuilder('click', 'open-search-result', '_onResultClick' );
+    this._classEventBuilder('ondragstart', 'open-search-result', '_onDragStart' );
 
   }
 
@@ -140,7 +147,7 @@
     var self = this;
     var val = e.target.value;
 
-    if ( val.length > 2 ) {
+    //if ( val.length > 2 ) {
 
       function reqListener () {
         var res = JSON.parse(this.responseText);
@@ -152,7 +159,7 @@
       oReq.open('get', 'http://opendata.arcgis.com/datasets.json?q='+val+'&sort_by=relevance', true);
       oReq.send();
 
-    }
+    //}
 
   }
 
@@ -162,6 +169,12 @@
   OpenSearch.prototype.searchResultClick = function(e) {
     var url = e.target.title;
     this.emit( 'search-result-selected', url );
+  }
+
+
+  OpenSearch.prototype.drag = function(e) {
+    e.dataTransfer.setData("text", e.target.title);
+    console.log('drag me...', e.target.title);
   }
 
 
@@ -186,11 +199,17 @@
 
 
   OpenSearch.prototype._onSearchKeyup = function(e) {
-    this.search(e);
+    if ( e.which == 13 ) {
+      this.search(e);
+    }
   }
 
   OpenSearch.prototype._onResultClick = function(e) {
     this.searchResultClick(e);
+  }
+
+  OpenSearch.prototype._onDragStart = function(e) {
+    this.drag(e);
   }
 
 

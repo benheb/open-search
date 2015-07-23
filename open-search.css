@@ -11,10 +11,12 @@
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   margin: 1%;
+  background: #f7f6f2;
 }
 
 #open-search-header {
   padding: 5px;
+  padding-left:2%;
   background: #EEE;
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
@@ -45,15 +47,15 @@
   border-radius: 2px;
   padding: 5px;
   font-size: 1.3rem;
-  border: 1px solid #EEE;
-  box-shadow: inset 2px 2px 3px -3px #999;
+  font-weight: 400;
+  border-radius: 4px;
+  border: 1px solid #B7B7B7;
 }
 
 #open-search-results-container {
   height: 100%;
-  width:95%;
+  width:97%;
   margin: auto;
-  padding: 5px;
   position: relative;
   overflow: hidden;
   margin-bottom: 10px;
@@ -72,14 +74,15 @@
 .open-search-result {
   list-style: none;
   position: relative;
-  border-bottom: 1px solid #EEE;
-  padding:5px;
+  border: 1px solid #EEE;
+  padding: 5px;
   padding-bottom: 15px;
   padding-top: 15px;
+  margin-bottom: 7px;
 }
 
 .open-search-result:hover {
-  background:#EEE;
+  background:#fdfdfd;
   cursor: pointer;
 }
 
