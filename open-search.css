@@ -99,7 +99,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
-  width: 80%;
+  width: 70%;
 }
 
 .open-search-result-desc {
@@ -118,7 +118,7 @@
   font-size: 12px; 
   position: absolute;
   right: 10px;
-  top: 15px;
+  top: 18px;
   pointer-events:none;
 }
 
