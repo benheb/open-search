@@ -84,6 +84,7 @@
 .open-search-result:hover {
   background:#fdfdfd;
   cursor: pointer;
+  border:1px dashed #CCC;
 }
 
 .open-search-result-title {

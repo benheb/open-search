@@ -71,7 +71,7 @@
     }); 
 
     this._classEventBuilder('click', 'open-search-result', '_onResultClick' );
-    this._classEventBuilder('ondragstart', 'open-search-result', '_onDragStart' );
+    this._classEventBuilder('dragstart', 'open-search-result', '_onDragStart' );
 
   }
 
@@ -209,6 +209,7 @@
   }
 
   OpenSearch.prototype._onDragStart = function(e) {
+    console.log('on drag start');
     this.drag(e);
   }
 
