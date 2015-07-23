@@ -42,7 +42,7 @@
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
 
     var containerHeight = document.getElementById('open-search').clientHeight;
-    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 100 + 'px';
+    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 85 + 'px';
 
     this._createElement('ul', resultsContainer, 'open-search-results-list', '', '');
 

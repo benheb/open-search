@@ -59,6 +59,7 @@
   position: relative;
   overflow: hidden;
   margin-bottom: 10px;
+  margin-top:10px;
 }
 
 #open-search-results-list {
