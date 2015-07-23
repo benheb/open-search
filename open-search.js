@@ -150,6 +150,8 @@
     var val = e.target.value;
 
     document.getElementById( 'open-search-loader' ).style.display = 'block';
+    var el = document.getElementById('open-search-results-list');
+    el.innerHTML = '';
 
     function reqListener () {
       var res = JSON.parse(this.responseText);
