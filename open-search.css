@@ -92,6 +92,7 @@
 
 .open-search-result-title {
   font-weight: 600;
+  font-size: 14px;
   pointer-events:none;
   white-space: nowrap;
   overflow: hidden;
@@ -101,7 +102,7 @@
 }
 
 .open-search-result-desc {
-  font-size: 0.8rem;
+  font-size: 12px;
   width: 95%;
   height: 17px;
   line-height: 20px;
@@ -109,10 +110,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events:none;
+  font-weight: 500;
 }
 
 .open-search-result-feature-count {
-  font-size: 0.8rem; 
+  font-size: 12px; 
   position: absolute;
   right: 10px;
   top: 15px;
