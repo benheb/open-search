@@ -17,6 +17,12 @@
     this.height = options.height || 'auto';
     this.container = container;
     this._handlers = {};
+
+    this.shapes = {
+      "esriGeometryPolyline": "Polylines",
+      "esriGeometryPolygon": "Polygons",
+      "esriGeometryPoint": "Points"
+    }
     
     this._buildUI(); 
   }
@@ -80,9 +86,23 @@
         result.title = r.url +','+ r.id;
         result.draggable = true;
 
-        self._createElement('div', result, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
-        self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
-        self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
+        var resultLeft = self._createElement('div', result, 'open-search-result-left-'+r.id, '', 'open-search-result-left');
+
+        var thumb = self._createElement('img', resultLeft, 'open-search-result-img-'+r.id, '', 'open-search-result-img');
+        thumb.src = r.thumbnail_url;
+        
+        var resultRight = self._createElement('div', result, 'open-search-result-right-'+r.id, '', 'open-search-result-right');
+
+        self._createElement('div', resultRight, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
+        self._createElement('div', resultRight, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
+        
+        var statContainer = self._createElement('div', resultRight, 'open-search-stat-container-'+r.id, '', 'open-search-result-stat-container');
+        self._createElement('div', statContainer, 'open-search-stat-'+r.id, r.record_count.toLocaleString(), 'open-search-result-stat');
+        self._createElement('div', statContainer, 'open-search-stat-title-'+r.id, self.shapes[r.geometry_type], 'open-search-stat-title');
+
+        var statContainer = self._createElement('div', resultRight, 'open-search-quality-container-'+r.id, '', 'open-search-result-stat-container');
+        self._createElement('div', statContainer, 'open-search-quality-'+r.id, r.quality, 'open-search-result-stat');
+        self._createElement('div', statContainer, 'open-search-quality-title-'+r.id, 'Quality Score', 'open-search-stat-title');
 
       }); 
     } else {
@@ -122,9 +142,24 @@
       result.title = r.url +','+ r.id;
       result.draggable = true;
 
-      self._createElement('div', result, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
-      self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
-      self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
+      var resultLeft = self._createElement('div', result, 'open-search-result-left-'+r.id, '', 'open-search-result-left');
+
+      var thumb = self._createElement('img', resultLeft, 'open-search-result-img-'+r.id, '', 'open-search-result-img');
+      thumb.src = r.thumbnail_url;
+      
+      var resultRight = self._createElement('div', result, 'open-search-result-right-'+r.id, '', 'open-search-result-right');
+
+      self._createElement('div', resultRight, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
+      self._createElement('div', resultRight, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
+      
+      var statContainer = self._createElement('div', resultRight, 'open-search-stat-container-'+r.id, '', 'open-search-result-stat-container');
+      self._createElement('div', statContainer, 'open-search-stat-'+r.id, r.record_count.toLocaleString(), 'open-search-result-stat');
+      self._createElement('div', statContainer, 'open-search-stat-title-'+r.id, self.shapes[r.geometry_type], 'open-search-stat-title');
+
+      var statContainer = self._createElement('div', resultRight, 'open-search-quality-container-'+r.id, '', 'open-search-result-stat-container');
+      self._createElement('div', statContainer, 'open-search-quality-'+r.id, r.quality, 'open-search-result-stat');
+      self._createElement('div', statContainer, 'open-search-quality-title-'+r.id, 'Quality Score', 'open-search-stat-title');
+      
     });
 
     this._classRemoveEventListeners('dragstart', 'open-search-result', '_onDragStart' );

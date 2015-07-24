@@ -54,7 +54,7 @@
 
 #open-search-results-container {
   height: 100%;
-  width:97%;
+  width:100%;
   margin: auto;
   position: relative;
   overflow: hidden;
@@ -64,8 +64,9 @@
 
 #open-search-results-list {
   padding-left: 0px;
-  width: 100%;
+  width: 97%;
   height: 100%;
+  margin: auto;
   overflow: hidden;
   overflow-y: auto;
   position: relative;
@@ -73,31 +74,68 @@
 }
 
 #open-search-meta {
-  
+  width:97%;
+  margin: auto;
+  margin-bottom:4px;
 }
 
+.open-search-result-img {
+  width:50px;
+  height:50px;
+  border-radius: 50px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%); filter: grayscale(100%); 
+  border:4px solid #EEE;
+}
+
+.open-search-result-left {
+  width:65px;
+  float: left;
+}
+
+.open-search-result-right {
+  width:auto;
+  display: inline block;
+}
 .open-search-result {
   list-style: none;
   position: relative;
+  background:#FDFDFD;
   border: 1px solid #EEE;
   padding: 5px;
   padding-bottom: 15px;
   padding-top: 15px;
   margin-bottom: 7px;
+  overflow: hidden;
   -webkit-animation:pop-in 0.5s;
   -moz-animation:pop-in 0.5s;
   -ms-animation:pop-in 0.5s;
 }
 
 .open-search-result:hover {
-  background:#fdfdfd;
+  background:#FFF;
   cursor: pointer;
-  border:1px dashed #CCC;
+  border:1px dashed #666;
 }
 
 .open-search-empty {
   text-align: center;
 }
+
+.open-search-result-stat-container {
+  float: left;
+  margin-right:10px;
+  margin-top:3px;
+}
+
+.open-search-result-stat {
+  font-size:18px;
+}
+
+.open-search-stat-title {
+  font-size: 8px;
+}
+
 
 .open-search-result-title {
   font-weight: 600;
@@ -107,12 +145,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
-  width: 70%;
+  width: auto;
 }
 
 .open-search-result-desc {
   font-size: 12px;
-  width: 95%;
+  width:auto;
   height: 17px;
   line-height: 20px;
   white-space: nowrap;
