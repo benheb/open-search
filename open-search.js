@@ -60,17 +60,24 @@
     el.innerHTML = '';
 
     var result;
-    res.data.forEach(function(r, i) {
+    if ( res.data.length ) {
+      res.data.forEach(function(r, i) {
+        result = document.createElement( 'li' );
+        el.appendChild( result ).className = 'open-search-result';
+        result.title = r.url +','+ r.id;
+        result.draggable = true;
+
+        self._createElement('div', result, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
+        self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
+        self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
+
+      }); 
+    } else {
       result = document.createElement( 'li' );
-      el.appendChild( result ).className = 'open-search-result';
-      result.title = r.url +','+ r.id;
-      result.draggable = true;
-
-      self._createElement('div', result, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
-      self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
-      self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
-
-    }); 
+      el.appendChild( result ).className = 'open-search-result open-search-empty';
+      var val = document.getElementById('open-search-input').value;
+      result.innerHTML = 'Sorry, your search for "'+val+'" turned up empty &#9785; <br />Try again.';
+    }
 
     this._classEventBuilder('click', 'open-search-result', '_onResultClick' );
     this._classEventBuilder('dragstart', 'open-search-result', '_onDragStart' );

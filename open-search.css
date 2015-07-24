@@ -91,6 +91,10 @@
   border:1px dashed #CCC;
 }
 
+.open-search-empty {
+  text-align: center;
+}
+
 .open-search-result-title {
   font-weight: 600;
   font-size: 14px;
