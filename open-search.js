@@ -126,6 +126,10 @@
       self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
       self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
     });
+
+    this._classRemoveEventListeners('dragstart', 'open-search-result', '_onDragStart' );
+    this._classEventBuilder('dragstart', 'open-search-result', '_onDragStart' );
+
   }
 
 
@@ -171,6 +175,19 @@
 
   }
 
+
+
+  OpenSearch.prototype._classRemoveEventListeners = function(eventName, className, fnName ) {
+    var self = this; 
+    
+    var linkEl = document.getElementsByClassName( className );
+    for(var i=0;i<linkEl.length;i++){
+      if(linkEl[i].removeEventListener){
+        linkEl[i].removeEventListener( eventName , function(e) { self[ fnName ].call(self, e) });
+      }
+    }
+
+  }
 
 
 
