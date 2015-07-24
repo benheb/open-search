@@ -17,14 +17,14 @@
 #open-search-header {
   padding: 5px;
   padding-left: 2%;
-  background: #8bacbd;
+  background: #676c7f;
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 700;
   font-size: 1em;
   line-height: 1em;
   pointer-events: auto;
-  color: #444;
+  color: #FFF;
 }
 
 /* Don't show shadows when selecting text */
