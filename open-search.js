@@ -96,9 +96,10 @@
         self._createElement('div', resultRight, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
         self._createElement('div', resultRight, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
         
+        var geom = ( self.shapes[r.geometry_type] ) ? self.shapes[r.geometry_type] : 'Features';
         var statContainer = self._createElement('div', resultRight, 'open-search-stat-container-'+r.id, '', 'open-search-result-stat-container');
         self._createElement('div', statContainer, 'open-search-stat-'+r.id, r.record_count.toLocaleString(), 'open-search-result-stat');
-        self._createElement('div', statContainer, 'open-search-stat-title-'+r.id, self.shapes[r.geometry_type], 'open-search-stat-title');
+        self._createElement('div', statContainer, 'open-search-stat-title-'+r.id, geom, 'open-search-stat-title');
 
         var statContainer = self._createElement('div', resultRight, 'open-search-quality-container-'+r.id, '', 'open-search-result-stat-container');
         self._createElement('div', statContainer, 'open-search-quality-'+r.id, r.quality, 'open-search-result-stat');
@@ -152,14 +153,15 @@
       self._createElement('div', resultRight, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
       self._createElement('div', resultRight, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
       
+      var geom = ( self.shapes[r.geometry_type] ) ? self.shapes[r.geometry_type] : 'Features';
       var statContainer = self._createElement('div', resultRight, 'open-search-stat-container-'+r.id, '', 'open-search-result-stat-container');
       self._createElement('div', statContainer, 'open-search-stat-'+r.id, r.record_count.toLocaleString(), 'open-search-result-stat');
-      self._createElement('div', statContainer, 'open-search-stat-title-'+r.id, self.shapes[r.geometry_type], 'open-search-stat-title');
+      self._createElement('div', statContainer, 'open-search-stat-title-'+r.id, geom, 'open-search-stat-title');
 
       var statContainer = self._createElement('div', resultRight, 'open-search-quality-container-'+r.id, '', 'open-search-result-stat-container');
       self._createElement('div', statContainer, 'open-search-quality-'+r.id, r.quality, 'open-search-result-stat');
       self._createElement('div', statContainer, 'open-search-quality-title-'+r.id, 'Quality Score', 'open-search-stat-title');
-      
+
     });
 
     this._classRemoveEventListeners('dragstart', 'open-search-result', '_onDragStart' );
