@@ -5,7 +5,7 @@
   background: #FFF;
   min-height: 110px;
   width: 98%;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.11);
+  /*box-shadow: 0 1px 5px rgba(0,0,0,0.11);*/
   border-radius: 4px;
   height: 98%;
   overflow: hidden;
@@ -16,16 +16,15 @@
 
 #open-search-header {
   padding: 5px;
-  padding-left:2%;
-  background: #EEE;
+  padding-left: 2%;
+  background: #8bacbd;
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 700;
   font-size: 1em;
   line-height: 1em;
-  pointer-events:auto;
-  color: rgba(172, 172, 172, 0.7);
-  text-shadow: 1px 1px 1px #EEE, 0 0 0 #EEE, 1px 2px 4px #EEE;
+  pointer-events: auto;
+  color: #444;
 }
 
 /* Don't show shadows when selecting text */
