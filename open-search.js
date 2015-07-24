@@ -76,7 +76,7 @@
       result = document.createElement( 'li' );
       el.appendChild( result ).className = 'open-search-result open-search-empty';
       var val = document.getElementById('open-search-input').value;
-      result.innerHTML = 'Sorry, your search for "'+val+'" turned up empty &#9785; <br />Try again.';
+      result.innerHTML = 'Sorry, your search for "'+val+'" turned up empty &#9785;';
     }
 
     this._classEventBuilder('click', 'open-search-result', '_onResultClick' );
