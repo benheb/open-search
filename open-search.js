@@ -49,12 +49,12 @@
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
 
     var containerHeight = document.getElementById('open-search').clientHeight;
-    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 90 + 'px';
+    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 82 + 'px';
 
     this._createElement('div', resultsContainer, 'open-search-meta', '', '');
 
     this._createElement('ul', resultsContainer, 'open-search-results-list', '', '');
-    document.getElementById( 'open-search-results-list' ).style.height = containerHeight - 120 + 'px';
+    document.getElementById( 'open-search-results-list' ).style.height = containerHeight - 110 + 'px';
 
     this._idEventBuilder('keydown', 'open-search-input', '_onSearchKeyup' );
     this._idEventBuilder('scroll', 'open-search-results-list', '_onScroll' );
