@@ -42,11 +42,15 @@
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
 
     var containerHeight = document.getElementById('open-search').clientHeight;
-    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 85 + 'px';
+    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 90 + 'px';
+
+    this._createElement('div', resultsContainer, 'open-search-meta', '', '');
 
     this._createElement('ul', resultsContainer, 'open-search-results-list', '', '');
+    document.getElementById( 'open-search-results-list' ).style.height = containerHeight - 120 + 'px';
 
     this._idEventBuilder('keydown', 'open-search-input', '_onSearchKeyup' );
+    this._idEventBuilder('scroll', 'open-search-results-list', '_onScroll' );
 
   }
 
@@ -56,6 +60,15 @@
   OpenSearch.prototype._buildResultList = function(res) {
     console.log('results', res);
     var self = this;
+    this.results = res;
+
+    var metael = document.getElementById( 'open-search-meta' );
+    var q = res.metadata.query_parameters;
+    var meta = 1 + '–' + q.per_page * q.page + ' of ' 
+      + res.metadata.stats.total_count.toLocaleString();
+    metael.innerHTML = meta;
+
+
     var el = document.getElementById('open-search-results-list');
     el.innerHTML = '';
 
@@ -84,6 +97,36 @@
 
   }
 
+
+
+
+  OpenSearch.prototype._addResults = function(res) {
+    var self = this;
+    this.results = res;
+
+    var metael = document.getElementById( 'open-search-meta' );
+    var q = res.metadata.query_parameters;
+    var total = res.metadata.stats.total_count;
+    var thru = q.per_page * q.page;
+    if ( thru >= total ) thru = total;
+    var meta = 1 + '–' + thru + ' of ' + total.toLocaleString();
+    metael.innerHTML = meta;
+
+
+    var el = document.getElementById('open-search-results-list');
+
+    var result;
+    res.data.forEach(function(r, i) {
+      result = document.createElement( 'li' );
+      el.appendChild( result ).className = 'open-search-result';
+      result.title = r.url +','+ r.id;
+      result.draggable = true;
+
+      self._createElement('div', result, 'open-search-result-title-'+r.id, r.name, 'open-search-result-title');
+      self._createElement('div', result, 'open-search-result-desc-'+r.id, r.description, 'open-search-result-desc');
+      self._createElement('div', result, 'open-search-result-feature-count-'+r.id, 'Features: '+r.record_count.toLocaleString(), 'open-search-result-feature-count');
+    });
+  }
 
 
     /*
@@ -152,23 +195,40 @@
 
 
 
-  OpenSearch.prototype.search = function(e) {
+  OpenSearch.prototype.search = function(e, page) {
     var self = this;
-    var val = e.target.value;
+    
+    this.value = ( e ) ? e.target.value : this.value;
 
-    document.getElementById( 'open-search-loader' ).style.display = 'block';
-    var el = document.getElementById('open-search-results-list');
-    el.innerHTML = '';
+    if ( !page ) {
+      document.getElementById( 'open-search-loader' ).style.display = 'block';
+      var el = document.getElementById('open-search-results-list');
+      el.innerHTML = '';
+
+      var metael = document.getElementById( 'open-search-meta' );
+      metael.innerHTML = '';
+    }
 
     function reqListener () {
       var res = JSON.parse(this.responseText);
-      self._buildResultList(res);
+      if ( page ) {
+        self._addResults(res);
+      } else {
+        self._buildResultList(res);
+      }
       document.getElementById( 'open-search-loader' ).style.display = 'none';
+    }
+
+    var url;
+    if ( page ) {
+      url = 'http://opendata.arcgis.com/datasets.json?q='+this.value+'&page='+page+'&sort_by=relevance';
+    } else {
+      url = 'http://opendata.arcgis.com/datasets.json?q='+this.value+'&sort_by=relevance'
     }
 
     var oReq = new XMLHttpRequest();
     oReq.onload = reqListener;
-    oReq.open('get', 'http://opendata.arcgis.com/datasets.json?q='+val+'&sort_by=relevance', true);
+    oReq.open('get', url, true);
     oReq.send();
 
   }
@@ -186,6 +246,12 @@
     e.dataTransfer.setData("text", e.target.title);
   }
 
+
+  OpenSearch.prototype.scroll = function(e) {
+    if ( e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight ) {
+      this.search(null, this.results.metadata.query_parameters.page + 1);
+    }
+  }
 
 
   /************* EVENTS **************/
@@ -219,6 +285,10 @@
 
   OpenSearch.prototype._onDragStart = function(e) {
     this.drag(e);
+  }
+
+  OpenSearch.prototype._onScroll = function(e) {
+    this.scroll(e);
   }
 
 
