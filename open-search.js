@@ -43,7 +43,8 @@
     var input = this._createElement('input', content, 'open-search-input', '', '');
     input.placeholder = 'Search ArcGIS Open Data';
 
-    this._createElement('div', content, 'open-search-loader', '', 'open-search-loader');
+    var loaderContainer = this._createElement('div', content, 'open-search-loader-container', '', 'open-search-loader-container');
+    this._createElement('div', loaderContainer, 'open-search-loader', '', 'open-search-loader');
 
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
 
@@ -242,8 +243,8 @@
     
     this.value = ( e ) ? e.target.value : this.value;
 
+    document.getElementById( 'open-search-loader-container' ).style.display = 'block';
     if ( !page ) {
-      document.getElementById( 'open-search-loader' ).style.display = 'block';
       var el = document.getElementById('open-search-results-list');
       el.innerHTML = '';
 
@@ -258,7 +259,7 @@
       } else {
         self._buildResultList(res);
       }
-      document.getElementById( 'open-search-loader' ).style.display = 'none';
+      document.getElementById( 'open-search-loader-container' ).style.display = 'none';
     }
 
     var url;

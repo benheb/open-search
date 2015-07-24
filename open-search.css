@@ -168,6 +168,19 @@
   pointer-events:none;
 }
 
+
+#open-search-loader-container {
+  position: absolute;
+  right: 0px;
+  top: 40px;
+  display: block;
+  z-index: 1000;
+  width: 116px;
+  height: 28px;
+  pointer-events: none;
+  display: none;
+}
+
 .open-search-loader:before,
 .open-search-loader:after,
 .open-search-loader {
@@ -180,7 +193,6 @@
   animation: load7 1.8s infinite ease-in-out;
 }
 .open-search-loader {
-  display: none;
   font-size: 10px;
   margin: 80px auto;
   position: relative;
