@@ -116,9 +116,7 @@
 
     var result;
     res.data.forEach(function(r, i) {
-      if ( i !== 0 ) {
-        self._addResultCard(r, i, el);
-      }
+      self._addResultCard(r, i, el);
     });
 
     this._classRemoveEventListeners('dragstart', 'open-search-result', '_onDragStart' );
@@ -132,7 +130,7 @@
     var self = this;
 
     var exists = document.getElementById(r.id);
-    if ( exists ) { console.log('DUp!'); return; }
+    if ( exists ) { return; }
 
     var result = document.createElement( 'li' );
     el.appendChild( result ).className = 'open-search-result';
