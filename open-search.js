@@ -131,8 +131,12 @@
   OpenSearch.prototype._addResultCard = function(r, i, el) {
     var self = this;
 
+    var exists = document.getElementById(r.id);
+    if ( exists ) { console.log('DUp!'); return; }
+
     var result = document.createElement( 'li' );
     el.appendChild( result ).className = 'open-search-result';
+    result.id = r.id;
     result.title = r.url +','+ r.id;
     result.draggable = true;
 
