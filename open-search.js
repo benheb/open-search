@@ -48,9 +48,6 @@
 
     var resultsContainer = this._createElement('div', content, 'open-search-results-container', '', '');
 
-    var containerHeight = document.getElementById('open-search').clientHeight;
-    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 82 + 'px';
-
     this._createElement('div', resultsContainer, 'open-search-meta', '', '');
 
     this._createElement('ul', resultsContainer, 'open-search-results-list', '', '');
@@ -65,6 +62,9 @@
 
 
   OpenSearch.prototype._buildResultList = function(res) {
+    var containerHeight = document.getElementById('open-search').clientHeight;
+    document.getElementById( 'open-search-results-container' ).style.height = containerHeight - 82 + 'px';
+
     console.log('results', res);
     var self = this;
     this.results = res;
@@ -293,11 +293,6 @@
 
 
   OpenSearch.prototype.scroll = function(e) {
-    console.log('-----');
-    console.log('e.target.scrollTop', e.target.scrollTop);
-    console.log('e.target.clientHeight', e.target.clientHeight);
-    console.log('>??')
-    console.log('e.target.scrollHeight', e.target.scrollHeight);
     if ( e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight ) {
       this.search(null, this.results.metadata.query_parameters.page + 1);
     }
