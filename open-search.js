@@ -293,6 +293,11 @@
 
 
   OpenSearch.prototype.scroll = function(e) {
+    console.log('-----');
+    console.log('e.target.scrollTop', e.target.scrollTop);
+    console.log('e.target.clientHeight', e.target.clientHeight);
+    console.log('>??')
+    console.log('e.target.scrollHeight', e.target.scrollHeight);
     if ( e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight ) {
       this.search(null, this.results.metadata.query_parameters.page + 1);
     }
