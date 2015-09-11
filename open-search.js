@@ -282,8 +282,9 @@
 
 
   OpenSearch.prototype.searchResultClick = function(e) {
-    var url = e.target.title;
-    this.emit( 'search-result-selected', url );
+    var service = e.target.getAttribute('title');
+    var id = e.target.id;
+    this.emit( 'search-result-selected', {service: service, id: id} );
   }
 
 

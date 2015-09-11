@@ -30,6 +30,10 @@
 
     <script>
        var search = new OpenSearch('search-container', {});
+
+       search.on('search-result-selected', function(e) {
+        console.log('e', e);
+      });
     </script>
   </body>
 </html>
