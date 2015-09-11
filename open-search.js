@@ -91,7 +91,7 @@
       result.innerHTML = 'Sorry, your search for "'+val+'" turned up empty &#9785;';
     }
 
-    this._classEventBuilder('click', 'open-search-result', '_onResultClick' );
+    this._classEventBuilder('click', 'open-search-result-add', '_onResultClick' );
     this._classEventBuilder('dragstart', 'open-search-result', '_onDragStart' );
 
   }
@@ -157,6 +157,9 @@
     self._createElement('div', statContainer, 'open-search-quality-'+r.id, r.quality, 'open-search-result-stat');
     self._createElement('div', statContainer, 'open-search-quality-title-'+r.id, 'Quality Score', 'open-search-stat-title');
 
+    var addContainer = self._createElement('div', resultRight, 'open-search-result-add-container-'+r.id, '', 'open-search-result-add-container');
+    var adder = self._createElement('div', addContainer, 'open-search-result-add-'+r.id, '&#43;', 'open-search-result-add');
+    adder.title = r.url +','+ r.id;
   }
 
 
@@ -281,7 +284,7 @@
 
 
 
-  OpenSearch.prototype.searchResultClick = function(e) {
+  OpenSearch.prototype.searchAddResultClick = function(e) {
     var urls = e.target.getAttribute('title');
     this.emit( 'search-result-selected', urls );
   }
@@ -325,7 +328,7 @@
   }
 
   OpenSearch.prototype._onResultClick = function(e) {
-    this.searchResultClick(e);
+    this.searchAddResultClick(e);
   }
 
   OpenSearch.prototype._onDragStart = function(e) {
